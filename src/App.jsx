@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 
 const App = () => {
   const [logo, setLogo] = useState(null);
-  const [previewPDF, setPreviewPDF] = useState(null);
 
   // State for the table rows, starting with one default row
   const [items, setItems] = useState([
@@ -73,61 +70,7 @@ const App = () => {
     setLogo(null);
   };
 
-  const handleGeneratePDFPreview = () => {
-    const invoice = document.getElementById("invoice-form");
-    html2canvas(invoice).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      setPreviewPDF(imgData);
-    });
-  };
-  
 
-  // const handleDownloadPDF = () => {
-  //   if (previewPDF) {
-  //     const pdf = new jsPDF({
-  //       orientation: 'portrait', // Set orientation based on invoice layout
-  //       unit: 'pt', // Use points for better precision
-  //       format: 'a4' // A4 size, change if needed
-  //     });
-  
-  //     const img = new Image();
-  //     img.src = previewPDF;
-  
-  //     img.onload = () => {
-  //       // Get PDF page dimensions
-  //       const pageWidth = pdf.internal.pageSize.getWidth();
-  //       const pageHeight = pdf.internal.pageSize.getHeight();
-  
-  //       // Calculate aspect ratio
-  //       const imgWidth = img.width;
-  //       const imgHeight = img.height;
-  //       const imgAspectRatio = imgWidth / imgHeight;
-  
-  //       let finalWidth, finalHeight;
-  
-  //       // Check whether width or height is the limiting factor and scale accordingly
-  //       if (imgAspectRatio > pageWidth / pageHeight) {
-  //         // Width is the limiting factor
-  //         finalWidth = pageWidth;
-  //         finalHeight = pageWidth / imgAspectRatio;
-  //       } else {
-  //         // Height is the limiting factor
-  //         finalHeight = pageHeight;
-  //         finalWidth = pageHeight * imgAspectRatio;
-  //       }
-  
-  //       // Center the image on the PDF page
-  //       const xOffset = (pageWidth - finalWidth) / 2;
-  //       const yOffset = (pageHeight - finalHeight) / 2;
-  
-  //       // Add the image to the PDF
-  //       pdf.addImage(img, "PNG", xOffset, yOffset, finalWidth, finalHeight);
-  
-  //       // Save the PDF
-  //       pdf.save("invoice.pdf");
-  //     };
-  //   }
-  // };
   
 
   // Add a new row in the table
